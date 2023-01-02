@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class UserDetailsImpl implements UserDetails {
         return usuario.getRoles().stream()
                 .map(role-> new SimpleGrantedAuthority(role.getDescripcionRol()))
                 .collect(Collectors.toList());
+
     }
 
     @Override
@@ -52,6 +54,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public String getNombre(){
-        return usuario.
+       return usuario.getTrabajador().getNombreTrabajador()+" "+usuario.getTrabajador().getApellidopaTrabajador()+" "+usuario.getTrabajador().getApellidomaTrabajador();
     }
 }

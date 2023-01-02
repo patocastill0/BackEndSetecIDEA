@@ -17,11 +17,11 @@ public class Role implements Serializable {
     @Column(name = "descripcion_rol", nullable = false, length = 50)
     private String descripcionRol;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "usuario_roles",
             joinColumns = @JoinColumn(name = "id_roles"),
             inverseJoinColumns = @JoinColumn(name = "id_usuario"))
-    private Set<Usuario> usuarios = new LinkedHashSet<>();
+    private Set<Usuario> usuarios ;
 
     public Integer getId() {
         return id;

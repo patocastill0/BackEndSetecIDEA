@@ -127,6 +127,9 @@ public class Trabajador implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_curso"))
     private Set<Curso> cursos = new LinkedHashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "trabajador")
+    private Usuario usuario;
+
     public String getId() {
         return id;
     }
@@ -375,4 +378,11 @@ public class Trabajador implements Serializable {
         this.cursos = cursos;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

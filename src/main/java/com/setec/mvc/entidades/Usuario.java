@@ -20,17 +20,21 @@ public class Usuario implements Serializable {
     @Column(name = "user_name_usuario", nullable = false, length = 100)
     private String userNameUsuario;
 
-    @Column(name = "password_usuario", nullable = false, length = 100)
+    @Column(name = "password_usuario", nullable = true, length = 100)
     private String passwordUsuario;
 
-    @Column(name = "token_password_usuario", nullable = false, length = 300)
+    @Column(name = "token_password_usuario",  length = 300)
     private String tokenPasswordUsuario;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "usuario_roles",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_roles"))
-    private Set<Role> roles = new LinkedHashSet<>();
+    private Set<Role> roles ;
+
+    @JoinColumn(name = "trabajador", referencedColumnName = "id_curp", insertable = false, updatable = false)
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
+    private Trabajador trabajador;
 
     public Integer getId() {
         return id;
@@ -78,6 +82,14 @@ public class Usuario implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Trabajador getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
     }
 
 }

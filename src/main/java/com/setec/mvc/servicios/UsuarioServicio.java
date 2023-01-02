@@ -18,23 +18,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UsuarioServicio implements UserDetailsService {
+public class UsuarioServicio  {
 
-    private Logger logger = LoggerFactory.getLogger(UsuarioServicio.class);
     @Autowired
     private Usuariodao usuariodao;
 
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario= usuariodao.findByUserNameUsuario(username);
-        if(usuario==null){
-            logger.error("error de login");
-            throw new  UsernameNotFoundException("error de login");
-        }
-        List<GrantedAuthority> authorities=usuario.getRoles().stream()
-                .map(role-> new SimpleGrantedAuthority(role.getDescripcionRol()))
-                .collect(Collectors.toList());
-        return new User(usuario.getUserNameUsuario(), usuario.getPasswordUsuario(), usuario.getEstadoUsuario(), true, true, true, authorities);
-    }
+
+
 }
