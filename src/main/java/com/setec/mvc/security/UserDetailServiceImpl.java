@@ -18,7 +18,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario= usuariodao.findByUserNameUsuario(username)
                 .orElseThrow(()->new UsernameNotFoundException("el usuario "+username+" no existe"));
-        System.out.println(usuario);
         return new UserDetailsImpl(usuario);
     }
 }
