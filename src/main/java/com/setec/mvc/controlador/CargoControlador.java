@@ -46,7 +46,7 @@ public class CargoControlador {
 
     //@Secured({"ROLE_ADMIN","ROLE_ADMINSYSTEMAS"})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String,Boolean>> eliminarCargo(@PathVariable String id){
+    public ResponseEntity<Map<String,Boolean>> eliminarCargo(@PathVariable int id){
         cargoImpl.delete(id);
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("eliminado",Boolean.TRUE);

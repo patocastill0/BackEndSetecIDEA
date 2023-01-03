@@ -73,9 +73,11 @@ public class CargoImpl implements Crud<CargoDto>{
     }
 
     public CargoDto update(CargoDto tipo, int id) {
-        Cargo cargo=new Cargo();
+
         Cargo cargoActualizado=null;
         if(!cargoDao.findById(id).isEmpty()){
+            Cargo cargo=cargoDao.findById(id).get();
+            cargo.setId(tipo.getId());
             cargo.setNombreCargo(tipo.getNombreCargo());
             cargoActualizado=cargoDao.save(cargo);
         }
@@ -86,7 +88,7 @@ public class CargoImpl implements Crud<CargoDto>{
     @Override
     public Cargo mapearEntity(CargoDto entidadDto) {
         Cargo cargo= new Cargo();
-        cargo.setId(entidadDto.getId());
+        //cargo.setId(entidadDto.getId());
         cargo.setNombreCargo(entidadDto.getNombreCargo());
         return cargo;
     }
