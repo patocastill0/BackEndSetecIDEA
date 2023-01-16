@@ -1,8 +1,7 @@
 package com.setec.mvc.controlador;
 
-import com.setec.mvc.dtos.CdcDto;
 import com.setec.mvc.dtos.CluaDto;
-import com.setec.mvc.servicios.CdcServicioImpl;
+import com.setec.mvc.general.EntidadRespuesta;
 import com.setec.mvc.servicios.CluaServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +29,12 @@ public class CluaControlador {
     @GetMapping("/{id}")
     public ResponseEntity<CluaDto> obtenerClua(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(cluaServicio.findById(id));
+    }
+
+    //@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_ADMINSYSTEMAS","ROLE_TESORERO","ROLE_CONTADOR"})
+    @GetMapping("/page/{page}")
+    public EntidadRespuesta<CluaDto> listarEmpleado(@PathVariable Integer page, @RequestParam(value = "pageSize",defaultValue = "6",required = false)int cantidadPagina){
+        return cluaServicio.findAll(page,cantidadPagina);
     }
 
     //@Secured({"ROLE_ADMINSYSTEMAS"})

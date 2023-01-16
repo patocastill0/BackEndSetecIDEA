@@ -10,7 +10,6 @@ import java.util.Set;
 @Table(name = "instructor")
 public class Instructor implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "curp_instructor", nullable = false, length = 20)
     private String id;
 

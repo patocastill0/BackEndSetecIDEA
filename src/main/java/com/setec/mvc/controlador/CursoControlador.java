@@ -1,6 +1,7 @@
 package com.setec.mvc.controlador;
 
 import com.setec.mvc.dtos.CursoDto;
+import com.setec.mvc.general.EntidadRespuesta;
 import com.setec.mvc.servicios.CursoServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,12 @@ public class CursoControlador {
     @GetMapping("/{id}")
     public ResponseEntity<CursoDto> obtenerCurso(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(cursoServicio.findById(id));
+    }
+
+    //@Secured({"ROLE_ADMIN","ROLE_USER","ROLE_ADMINSYSTEMAS","ROLE_TESORERO","ROLE_CONTADOR"})
+    @GetMapping("/page/{page}")
+    public EntidadRespuesta<CursoDto> listarCurso(@PathVariable Integer page, @RequestParam(value = "pageSize",defaultValue = "6",required = false)int cantidadPagina){
+        return cursoServicio.findAll(page,cantidadPagina);
     }
 
     //@Secured({"ROLE_ADMINSYSTEMAS"})

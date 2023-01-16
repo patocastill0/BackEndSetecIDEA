@@ -4,12 +4,15 @@ import com.setec.mvc.dao.Cdcdao;
 import com.setec.mvc.dao.Cluadao;
 import com.setec.mvc.dtos.CdcDto;
 import com.setec.mvc.dtos.CluaDto;
+import com.setec.mvc.dtos.CursoDto;
 import com.setec.mvc.entidades.Cdc;
 import com.setec.mvc.entidades.Clua;
+import com.setec.mvc.entidades.Curso;
 import com.setec.mvc.general.EntidadRespuesta;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +30,10 @@ public class CluaServicioImpl implements Crud<CluaDto>{
         CluaDto cluaDto=null;
         if(!cluadao.findById(id).isEmpty()) {
             Clua clua=cluadao.findById(id).get();
-            cluaDto= new CluaDto(clua.getId(),clua.getEstadoClua(),clua.getFechaCreacionClua(),clua.getVigenciaClua());
+            cluaDto= new CluaDto(clua.getId(),
+                    clua.getEstadoClua(),
+                    clua.getFechaCreacionClua(),
+                    clua.getVigenciaClua());
         }
         return cluaDto;
     }
@@ -50,7 +56,27 @@ public class CluaServicioImpl implements Crud<CluaDto>{
 
     @Override
     public EntidadRespuesta<CluaDto> findAll(int numeroDePagina, int MedidaDePagina) {
-        return null;
+        Pageable pageable = PageRequest.of(numeroDePagina, MedidaDePagina);
+        Page<Clua> cluaP=cluadao.findAll(pageable);
+        List<Clua> listaClua =cluaP.getContent();
+        List<CluaDto> lista= new ArrayList<>();
+        for(Clua clua:listaClua){
+            lista.add(new CluaDto(clua.getId(),
+                    clua.getEstadoClua(),
+                    clua.getFechaCreacionClua(),
+                    clua.getVigenciaClua()));
+        }
+        EntidadRespuesta entidadrespuesta=new EntidadRespuesta();
+        entidadrespuesta.setContenido(lista);
+        entidadrespuesta.setNumeroPagina(cluaP.getNumber());
+        entidadrespuesta.setMedidaPagina(cluaP.getSize());
+        entidadrespuesta.setTotalElementos(cluaP.getTotalElements());
+        entidadrespuesta.setTotalPaginas(cluaP.getTotalPages());
+        entidadrespuesta.setUltima(cluaP.isLast());
+        entidadrespuesta.setPrimera(cluaP.isFirst());
+
+        return entidadrespuesta;
+
     }
 
     @Override
