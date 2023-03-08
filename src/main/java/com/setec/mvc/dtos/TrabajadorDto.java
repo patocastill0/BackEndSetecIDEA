@@ -24,6 +24,7 @@ public class TrabajadorDto implements Serializable {
     private final String claveElectorTrabajador;
     private final String codigoPostalTrabajador;
     private final String calleTrabajador;
+    private final MunicipioDto municipioTrabajador;
     private final String coloniaTrabajador;
     private final String telcasaTrabajador;
     private final String seccionTrabajador;
