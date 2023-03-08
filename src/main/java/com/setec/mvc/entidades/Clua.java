@@ -11,7 +11,6 @@ import java.util.Set;
 @Table(name = "clua")
 public class Clua implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_clua", nullable = false, length = 250)
     private String id;
 
