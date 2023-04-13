@@ -28,4 +28,8 @@ public class MunicipioControlador {
     public ResponseEntity<MunicipioDto> obtenerMunicipio(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(municipioServicio.findById(id));
     }
+    @GetMapping("/term/{term}")
+    public List<MunicipioDto> findByTerm(@PathVariable(name="term")String term){
+        return municipioServicio.findByTerm(term);
+    }
 }

@@ -1,11 +1,12 @@
 package com.setec.mvc.entidades;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "clua")
@@ -22,6 +23,10 @@ public class Clua implements Serializable {
 
     @Column(name = "vigencia_clua", nullable = false, length = 50)
     private String vigenciaClua;
+
+    @Column(name = "anio_afiliacion", nullable = false, length=20)
+    private String anioAfiliacion;
+
 
     @OneToMany(mappedBy = "cluaTrabajador")
     private Set<Trabajador> trabajadors = new LinkedHashSet<>();
@@ -53,9 +58,14 @@ public class Clua implements Serializable {
     public String getVigenciaClua() {
         return vigenciaClua;
     }
-
     public void setVigenciaClua(String vigenciaClua) {
         this.vigenciaClua = vigenciaClua;
+    }
+
+    public String getAnioAfiliacion() {return anioAfiliacion;}
+
+    public void setAnioAfiliacion(String anioAfiliacion) {
+        this.anioAfiliacion = anioAfiliacion;
     }
 
     public Set<Trabajador> getTrabajadors() {

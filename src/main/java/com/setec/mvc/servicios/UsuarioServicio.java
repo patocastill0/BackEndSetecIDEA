@@ -1,3 +1,4 @@
+/**
 package com.setec.mvc.servicios;
 
 import com.setec.mvc.dao.Usuariodao;
@@ -25,4 +26,4 @@ public class UsuarioServicio  {
 
 
 
-}
+}*/

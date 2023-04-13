@@ -1,29 +1,26 @@
-package com.setec.mvc.dtos;
+package com.setec.mvc.dtos.reportesJasper;
 
+import com.setec.mvc.dtos.*;
 import com.setec.mvc.enums.GeneroType;
 import com.setec.mvc.enums.TrabajadorType;
 import lombok.*;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * A DTO for the {@link com.setec.mvc.entidades.Trabajador} entity
- */
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
-public class TrabajadorDto implements Serializable {
+public class TrabajadorJasperDTO implements Serializable {
     private final String id;
     private final String nombreTrabajador;
     private final String apellidopaTrabajador;
     private final String apellidomaTrabajador;
-    private final GeneroType generoTrabajador;
+    private final String generoTrabajador;
     private final Date fechanaTrabajador;
     private final String estadoCivilTrabajador;
     private final String telcelularTrabajador;
@@ -31,7 +28,7 @@ public class TrabajadorDto implements Serializable {
     private final String codigoPostalTrabajador;
     private final String calleTrabajador;
     private final String numeroCalle;
-    private final MunicipioDto municipioTrabajador;
+    private final String municipioTrabajador;
     private final String coloniaTrabajador;
     private final String telcasaTrabajador;
     private final String seccionTrabajador;
@@ -46,18 +43,18 @@ public class TrabajadorDto implements Serializable {
     private final SectorDto sectorTrabajador;
     private final CdcDto cdcTrabajador;
     private final CargoDto cargoTrabajador;
-    private final CluaDto cluaTrabajador;
+    private final String cluaTrabajador;
     private final TrabajadorType tipoTrabajador;
     private final Boolean eliminarTrabajador;
     private final String urlimagenTrabajador;
     private final Set<CursoDto> cursos;
     private final UsuarioDto usuario;
-    private final boolean hasactanacimiento;
-    private final boolean hascomprobante;
-    private final boolean hascurp;
-    private final boolean hasine;
+
+    private final String hasactanacimiento;
+    private final String hascomprobante;
+    private final String hascurp;
+    private final String hasine;
+
     private final String anioAfiliacion;
     private final String idClua;
-
-
 }

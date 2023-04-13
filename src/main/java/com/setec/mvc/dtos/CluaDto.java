@@ -14,4 +14,7 @@ public class CluaDto implements Serializable {
     private final String estadoClua;
     private final LocalDate fechaCreacionClua;
     private final String vigenciaClua;
+    private final String anioAfiliacion;
+
+
 }

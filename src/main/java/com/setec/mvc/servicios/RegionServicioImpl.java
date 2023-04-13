@@ -23,7 +23,7 @@ public class RegionServicioImpl implements Crud<RegionDto>{
         Region region=null;
         RegionDto regionDto=null;
         int idParse=Integer.parseInt(id);
-        if(!regiondao.findById(idParse).isEmpty()) {
+        if(regiondao.findById(idParse)!=null) {
             region=regiondao.findById(idParse).get();
             regionDto= new RegionDto(
                     region.getId(),

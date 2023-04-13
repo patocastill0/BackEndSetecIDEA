@@ -25,7 +25,7 @@ public class SectorServicioImpl implements Crud<SectorDto>{
         Sector sector=null;
         SectorDto sectorDto=null;
         int idParse=Integer.parseInt(id);
-        if(!sectordao.findById(idParse).isEmpty()) {
+        if(sectordao.findById(idParse)!=null) {
             sector=sectordao.findById(idParse).get();
             sectorDto= new SectorDto(
                     sector.getId(),

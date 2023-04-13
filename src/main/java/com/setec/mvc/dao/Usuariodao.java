@@ -11,5 +11,7 @@ import java.util.Optional;
 @Repository
 public interface Usuariodao extends JpaRepository<Usuario,Integer> {
 
-    public Optional<Usuario> findByUserNameUsuario(@Param("userNameUsuario")String userNameUsuario);
+    //public Optional<Usuario> findByUserNameUsuario(@Param("userNameUsuario")String userNameUsuario);
+
+    public Usuario findByUserNameUsuario(@Param("userNameUsuario")String userNameUsuario);
 }

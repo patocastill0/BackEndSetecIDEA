@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface Cargodao extends JpaRepository<Cargo, Integer> {
-
+    public Cargo findById(int id);
 }

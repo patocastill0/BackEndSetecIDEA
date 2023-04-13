@@ -25,8 +25,8 @@ public class CargoImpl implements Crud<CargoDto>{
     public CargoDto findById(int id) {
         Cargo cargo=null;
         CargoDto cargoDto=null;
-        if(!cargoDao.findById(id).isEmpty()) {
-            cargo=cargoDao.findById(id).get();
+        if(cargoDao.findById(id)!=null) {
+            cargo=cargoDao.findById(id);
             cargoDto= new CargoDto(cargo.getId(),cargo.getNombreCargo());
         }
         return cargoDto;
@@ -63,8 +63,8 @@ public class CargoImpl implements Crud<CargoDto>{
     }
 
     public void delete(int id) {
-        if(!cargoDao.findById(id).isEmpty())
-            cargoDao.delete(cargoDao.findById(id).get());
+        if(cargoDao.findById(id)!=null)
+            cargoDao.delete(cargoDao.findById(id));
     }
 
     @Override
@@ -75,8 +75,8 @@ public class CargoImpl implements Crud<CargoDto>{
     public CargoDto update(CargoDto tipo, int id) {
 
         Cargo cargoActualizado=null;
-        if(!cargoDao.findById(id).isEmpty()){
-            Cargo cargo=cargoDao.findById(id).get();
+        if(cargoDao.findById(id)!=null){
+            Cargo cargo=cargoDao.findById(id);
             cargo.setId(tipo.getId());
             cargo.setNombreCargo(tipo.getNombreCargo());
             cargoActualizado=cargoDao.save(cargo);

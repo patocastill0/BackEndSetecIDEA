@@ -1,3 +1,4 @@
+/**
 package com.setec.mvc.security;
 
 import com.setec.mvc.dao.Usuariodao;
@@ -20,4 +21,4 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 .orElseThrow(()->new UsernameNotFoundException("el usuario "+username+" no existe"));
         return new UserDetailsImpl(usuario);
     }
-}
+}*/

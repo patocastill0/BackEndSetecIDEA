@@ -23,7 +23,7 @@ public class RoleServicioImpl implements Crud<RoleDto>{
         Role role=null;
         RoleDto roleDto=null;
         int idParse=Integer.parseInt(id);
-        if(!roledao.findById(idParse).isEmpty()) {
+        if(roledao.findById(idParse)!=null) {
             role=roledao.findById(idParse).get();
             roleDto= new RoleDto(
                     role.getId(),

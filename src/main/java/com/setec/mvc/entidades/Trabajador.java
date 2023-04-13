@@ -2,17 +2,30 @@ package com.setec.mvc.entidades;
 
 import com.setec.mvc.enums.GeneroType;
 import com.setec.mvc.enums.TrabajadorType;
-import jakarta.persistence.*;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "trabajador")
+@NamedQueries({
+        @NamedQuery(name = "Trabajador.findAll", query = "SELECT t FROM Trabajador t"),
+        @NamedQuery(name = "Trabajador.findById", query = "SELECT t FROM Trabajador t WHERE t.id = :id"),
+        @NamedQuery(name = "Trabajador.findByFolio", query = "SELECT t FROM Trabajador t WHERE t.folioTrabajador = :folioTrabajador"),
+        @NamedQuery(name = "Trabajador.findByFolioJasper",query = "SELECT t FROM Trabajador t WHERE t.folioTrabajador =:folioTrabajador"),
+        @NamedQuery(name = "Trabajador.findByTerm", query = "SELECT t FROM Trabajador t WHERE UPPER(t.id) like CONCAT(UPPER(:id),'%') or UPPER(t.apellidomaTrabajador) like CONCAT(UPPER(:apellidomaTrabajador),'%') or UPPER(t.apellidopaTrabajador) like CONCAT(UPPER(:apellidopaTrabajador),'%') or UPPER(t.nombreTrabajador) like CONCAT(UPPER(:nombreTrabajador),'%') or CONCAT(UPPER(t.nombreTrabajador),' ',UPPER(t.apellidopaTrabajador),' ',UPPER(t.apellidomaTrabajador)) like CONCAT(UPPER(:nombreC),'%')")
+})
 public class Trabajador implements Serializable {
     @Id
     @Column(name = "id_curp", nullable = false, length = 20)
@@ -31,9 +44,10 @@ public class Trabajador implements Serializable {
     @Column(name = "genero_trabajador", nullable = false)
     private GeneroType generoTrabajador;
 
-
+    @Basic(optional = false)
     @Column(name = "fechana_trabajador", nullable = false)
-    private LocalDate fechanaTrabajador;
+    @Temporal(TemporalType.DATE)
+    private Date fechanaTrabajador;
 
     @Column(name = "estado_civil_trabajador", nullable = false, length = 100)
     private String estadoCivilTrabajador;
@@ -49,6 +63,9 @@ public class Trabajador implements Serializable {
 
     @Column(name = "calle_trabajador", nullable = false, length = 400)
     private String calleTrabajador;
+
+    @Column(name= "numero_calle", nullable = false, length = 20)
+    private String numeroCalle;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -105,20 +122,36 @@ public class Trabajador implements Serializable {
     @JoinColumn(name = "cargo_trabajador", nullable = false)
     private Cargo cargoTrabajador;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "clua_trabajador", nullable = false)
+    @JoinColumn(name = "clua_trabajador",nullable = true)
     private Clua cluaTrabajador;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_trabajador", nullable = false)
+    @Column(name = "tipo_trabajador", nullable = true)
     private TrabajadorType tipoTrabajador;
 
     @Column(name = "eliminar_trabajador")
     private Boolean eliminarTrabajador;
 
-    @Column(name = "urlimagen_trabajador", nullable = false)
+    @Column(name = "urlimagen_trabajador", nullable = true)
     private String urlimagenTrabajador;
+
+    @Basic(optional = false)
+    @Column(name = "hasactanacimiento")
+    private boolean hasactanacimiento;
+
+    @Basic(optional = false)
+    @Column(name = "hascomprobante")
+    private boolean hascomprobante;
+
+    @Basic(optional = false)
+    @Column(name = "hascurp")
+    private boolean hascurp;
+
+    @Basic(optional = false)
+    @Column(name = "hasine")
+    private boolean hasine;
 
     @ManyToMany
     @JoinTable(name = "trabajador_curso",
@@ -169,11 +202,11 @@ public class Trabajador implements Serializable {
         this.generoTrabajador = generoTrabajador;
     }
 
-    public LocalDate getFechanaTrabajador() {
+    public Date getFechanaTrabajador() {
         return fechanaTrabajador;
     }
 
-    public void setFechanaTrabajador(LocalDate fechanaTrabajador) {
+    public void setFechanaTrabajador(Date fechanaTrabajador) {
         this.fechanaTrabajador = fechanaTrabajador;
     }
 
@@ -215,6 +248,14 @@ public class Trabajador implements Serializable {
 
     public void setCalleTrabajador(String calleTrabajador) {
         this.calleTrabajador = calleTrabajador;
+    }
+
+    public String getNumeroCalle() {
+        return numeroCalle;
+    }
+
+    public void setNumeroCalle(String numeroCalle) {
+        this.numeroCalle = numeroCalle;
     }
 
     public Municipio getMunicipioTrabajador() {
@@ -383,5 +424,37 @@ public class Trabajador implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isHasactanacimiento() {
+        return hasactanacimiento;
+    }
+
+    public void setHasactanacimiento(boolean hasactanacimiento) {
+        this.hasactanacimiento = hasactanacimiento;
+    }
+
+    public boolean isHascomprobante() {
+        return hascomprobante;
+    }
+
+    public void setHascomprobante(boolean hascomprobante) {
+        this.hascomprobante = hascomprobante;
+    }
+
+    public boolean isHascurp() {
+        return hascurp;
+    }
+
+    public void setHascurp(boolean hascurp) {
+        this.hascurp = hascurp;
+    }
+
+    public boolean isHasine() {
+        return hasine;
+    }
+
+    public void setHasine(boolean hasine) {
+        this.hasine = hasine;
     }
 }

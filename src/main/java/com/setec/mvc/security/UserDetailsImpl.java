@@ -1,3 +1,4 @@
+/**
 package com.setec.mvc.security;
 
 import com.setec.mvc.entidades.Usuario;
@@ -63,4 +64,4 @@ public class UserDetailsImpl implements UserDetails {
                 .map(role-> new SimpleGrantedAuthority(role.getDescripcionRol()))
                 .collect(Collectors.toList());
     }
-}
+}*/

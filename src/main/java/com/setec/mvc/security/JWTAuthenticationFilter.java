@@ -1,3 +1,4 @@
+/**
 package com.setec.mvc.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,4 +52,4 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().flush();
         super.successfulAuthentication(request, response, chain, authResult);
     }
-}
+}*/

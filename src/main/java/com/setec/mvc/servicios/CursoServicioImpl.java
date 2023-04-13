@@ -23,7 +23,7 @@ public class CursoServicioImpl implements Crud<CursoDto>{
     @Override
     public CursoDto findById(String id) {
         CursoDto cursoDto=null;
-        if(!cursodao.findById(Integer.parseInt(id)).isEmpty()) {
+        if(cursodao.findById(Integer.parseInt(id))!=null) {
             Curso curso=cursodao.findById(Integer.parseInt(id)).get();
             cursoDto= new CursoDto(curso.getId(),
                     curso.getNombreCurso(),
@@ -101,7 +101,7 @@ public class CursoServicioImpl implements Crud<CursoDto>{
     @Override
     public void delete(String id) {
         int identero=Integer.parseInt(id);
-        if(!cursodao.findById(identero).isEmpty())
+        if(cursodao.findById(identero)!=null)
             cursodao.delete(cursodao.findById(identero).get());
     }
 
@@ -109,7 +109,7 @@ public class CursoServicioImpl implements Crud<CursoDto>{
     public CursoDto update(CursoDto tipo, String id) {
         Curso cursoActualizado=null;
         int identero=Integer.parseInt(id);
-        if(!cursodao.findById(identero).isEmpty()){
+        if(cursodao.findById(identero)!=null){
             Curso curso=cursodao.findById(identero).get();
             curso.setId(tipo.getId());
             curso.setNombreCurso(tipo.getNombreCurso());

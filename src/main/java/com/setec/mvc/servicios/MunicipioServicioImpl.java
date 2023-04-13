@@ -25,8 +25,8 @@ public class MunicipioServicioImpl implements Crud<MunicipioDto>{
         Municipio municipio=null;
         MunicipioDto municipioDto=null;
         int idParse=Integer.parseInt(id);
-        if(!municipiodao.findById(idParse).isEmpty()) {
-            municipio=municipiodao.findById(idParse).get();
+        if(municipiodao.findById(idParse)!=null) {
+            municipio=municipiodao.findById(idParse);
             municipioDto= new MunicipioDto(
                     municipio.getId(),
                     municipio.getNombreMunicipio(),
@@ -50,7 +50,18 @@ public class MunicipioServicioImpl implements Crud<MunicipioDto>{
                     municipio.getCabeceraMunicipal()));
         return municipioDtos;
     }
+    public List<MunicipioDto> findByTerm(String term) {
 
+        List<Municipio> listaMunicipios = municipiodao.findByTerminoMunicipio(term,term);
+        List<MunicipioDto> listaMunicipiosDTO= new ArrayList<>();
+
+        for (Municipio municipios : listaMunicipios) {
+
+            listaMunicipiosDTO.add(new MunicipioDto(
+                    municipios.getId(), municipios.getNombreMunicipio(),municipios.getCabeceraMunicipal()));
+        }
+        return listaMunicipiosDTO;
+    }
     @Override
     public EntidadRespuesta<MunicipioDto> findAll(int numeroDePagina, int MedidaDePagina) {
         return null;

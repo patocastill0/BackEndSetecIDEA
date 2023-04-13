@@ -23,7 +23,7 @@ public class InstructorServicioImpl implements Crud<InstructorDto>{
     @Override
     public InstructorDto findById(String id) {
         InstructorDto instructorDto=null;
-        if(!instructordao.findById(id).isEmpty()) {
+        if(instructordao.findById(id)!=null) {
             Instructor instructor=instructordao.findById(id).get();
             instructorDto= new InstructorDto(instructor.getId(),
                     instructor.getNombreInstructor(),
@@ -82,14 +82,14 @@ public class InstructorServicioImpl implements Crud<InstructorDto>{
 
     @Override
     public void delete(String id) {
-        if(!instructordao.findById(id).isEmpty())
+        if(instructordao.findById(id)!=null)
             instructordao.delete(instructordao.findById(id).get());
     }
 
     @Override
     public InstructorDto update(InstructorDto tipo, String id) {
         Instructor instructorActualizado=null;
-        if(!instructordao.findById(id).isEmpty()){
+        if(instructordao.findById(id)!=null){
             Instructor instructor=instructordao.findById(id).get();
             instructor.setId(tipo.getId());
             instructor.setNombreInstructor(tipo.getNombreInstructor());

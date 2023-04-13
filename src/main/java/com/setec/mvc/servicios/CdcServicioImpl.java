@@ -26,7 +26,7 @@ public class CdcServicioImpl implements Crud<CdcDto>{
 
     public CdcDto findById(int id) {
         CdcDto cdcDto=null;
-        if(!cdcdao.findById(id).isEmpty()) {
+        if(cdcdao.findById(id)!=null) {
             Cdc cdc=cdcdao.findById(id).get();
             cdcDto= new CdcDto(cdc.getId(),cdc.getNombreCdc());
         }
@@ -64,7 +64,7 @@ public class CdcServicioImpl implements Crud<CdcDto>{
     }
 
     public void delete(int id) {
-        if(!cdcdao.findById(id).isEmpty())
+        if(cdcdao.findById(id)!=null)
             cdcdao.delete(cdcdao.findById(id).get());
     }
 
@@ -76,7 +76,7 @@ public class CdcServicioImpl implements Crud<CdcDto>{
     public CdcDto update(CdcDto tipo, int id) {
 
         Cdc cdcActualizado=null;
-        if(!cdcdao.findById(id).isEmpty()){
+        if(cdcdao.findById(id)!=null){
             Cdc cdc=cdcdao.findById(id).get();
             cdc.setId(tipo.getId());
             cdc.setNombreCdc(tipo.getNombreCdc());

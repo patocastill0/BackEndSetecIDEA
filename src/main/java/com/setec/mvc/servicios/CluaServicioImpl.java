@@ -28,12 +28,13 @@ public class CluaServicioImpl implements Crud<CluaDto>{
     @Override
     public CluaDto findById(String id) {
         CluaDto cluaDto=null;
-        if(!cluadao.findById(id).isEmpty()) {
+        if(cluadao.findById(id)!=null) {
             Clua clua=cluadao.findById(id).get();
             cluaDto= new CluaDto(clua.getId(),
                     clua.getEstadoClua(),
                     clua.getFechaCreacionClua(),
-                    clua.getVigenciaClua());
+                    clua.getVigenciaClua(),
+                    clua.getAnioAfiliacion());
         }
         return cluaDto;
     }
@@ -50,7 +51,7 @@ public class CluaServicioImpl implements Crud<CluaDto>{
         List<Clua>cluas=cluadao.findAll();
         List<CluaDto>cluaDtos=new ArrayList<>();
         for(Clua clua:cluas)
-            cluaDtos.add(new CluaDto(clua.getId(),clua.getEstadoClua(),clua.getFechaCreacionClua(),clua.getVigenciaClua()));
+            cluaDtos.add(new CluaDto(clua.getId(),clua.getEstadoClua(),clua.getFechaCreacionClua(),clua.getVigenciaClua(),clua.getAnioAfiliacion()));
         return cluaDtos;
     }
 
@@ -64,7 +65,8 @@ public class CluaServicioImpl implements Crud<CluaDto>{
             lista.add(new CluaDto(clua.getId(),
                     clua.getEstadoClua(),
                     clua.getFechaCreacionClua(),
-                    clua.getVigenciaClua()));
+                    clua.getVigenciaClua(),
+                    clua.getAnioAfiliacion()));
         }
         EntidadRespuesta entidadrespuesta=new EntidadRespuesta();
         entidadrespuesta.setContenido(lista);
@@ -86,14 +88,14 @@ public class CluaServicioImpl implements Crud<CluaDto>{
 
     @Override
     public void delete(String id) {
-        if(!cluadao.findById(id).isEmpty())
+        if(cluadao.findById(id)!=null)
             cluadao.delete(cluadao.findById(id).get());
     }
 
     @Override
     public CluaDto update(CluaDto tipo, String id) {
         Clua cluaActualizado=null;
-        if(!cluadao.findById(id).isEmpty()){
+        if(cluadao.findById(id)!=null){
             Clua clua=cluadao.findById(id).get();
             clua.setId(tipo.getId());
             clua.setEstadoClua(tipo.getEstadoClua());
@@ -117,6 +119,6 @@ public class CluaServicioImpl implements Crud<CluaDto>{
 
     public CluaDto mapearDTO(@NotNull Clua entidad) {
 
-        return new CluaDto(entidad.getId(),entidad.getEstadoClua(),entidad.getFechaCreacionClua(),entidad.getVigenciaClua());
+        return new CluaDto(entidad.getId(),entidad.getEstadoClua(),entidad.getFechaCreacionClua(),entidad.getVigenciaClua(),entidad.getAnioAfiliacion());
     }
 }
